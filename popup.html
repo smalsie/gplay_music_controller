@@ -1,0 +1,73 @@
+<!doctype html>
+<!--
+ This page is shown when the extension button is clicked, because the
+ "browser_action" field in manifest.json contains the "default_popup" key with
+ value "popup.html".
+ -->
+<html>
+  <head>
+    <title>Play Music Popup</title>
+    <script src="popup.js"></script>
+    <style>
+
+        body {
+            width: 250px;
+        }
+
+        #left {
+            float: left;
+            width: 100px;
+        }
+
+        #right {
+            float: left;
+            margin-left: 10px;
+            width: 130px;
+        }
+
+        #buttons {
+            position: absolute;
+            bottom: 10px;
+        }
+
+        #name {
+            overflow: hidden;
+           text-overflow: ellipsis;
+           display: -webkit-box;
+           -webkit-box-orient: vertical;
+           -webkit-line-clamp: 3; /* number of lines to show */
+           line-height: 15px;        /* fallback */
+           max-height: 45px;       /* fallback */
+        }
+
+        #image {
+            height: 90px;
+            width: 90px;
+        }
+
+    </style>
+  </head>
+  <body>
+    <div id="closed">
+        <h3>Google Play Music is currently closed, please open it!</h3>
+    </div>
+
+    <div id="open" hidden>
+
+        <div id="left">
+            <img id="image" />
+        </div>
+
+        <div id="right">
+
+            <p id="name"></p>
+
+            <div id="buttons">
+                <button id="next">Next</button>
+                <button id="previous">Previous</button>
+            </div>
+
+        </div>
+    </div>
+  </body>
+</html>
