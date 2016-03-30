@@ -1,0 +1,13 @@
+Hello
+
+<button onclick="next()">Next</button>
+<script src="socket.io.js"></script>
+<script>
+var socket = io('https://localhost:8001', {secure: true});
+    function next() {
+
+        socket.emit('control', '');
+
+    }
+
+</script>
