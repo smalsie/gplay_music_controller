@@ -1,13 +1,47 @@
-Hello
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Play Music</title>
+</head>
 
-<button onclick="next()">Next</button>
-<script src="socket.io.js"></script>
-<script>
-var socket = io('https://localhost:8001', {secure: true});
-    function next() {
+<body>
 
-        socket.emit('control', '');
+    <img id="image"/>
+    <h1 id="name"></h1>
 
+    <br/>
+    <button onclick="control('previous')">Previous</button>
+    <button onclick="control('next')">Next</button>
+    <script src="socket.io.js"></script>
+    <script>
+
+    var songDetails = {
+        name: '',
+        image: '',
+    };
+
+    var port = (window.location.port ? (':' + window.location.port) : '');
+    var url = 'https://' + window.location.hostname + port;
+
+    var socket = io(url, {secure: true});
+
+    function control(type) {
+        socket.emit('control', type);
     }
 
-</script>
+    socket.on('song', function(song) {
+        var image = document.getElementById('image');
+        var name = document.getElementById('name');
+        if (song.name != songDetails.name) {
+            console.log(song);
+            songDetails = song;
+
+            image.src = song.image;
+            name.innerHTML = song.name;
+        }
+    });
+
+    </script>
+
+</body>
+</html>

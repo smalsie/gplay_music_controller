@@ -23,14 +23,19 @@ app.get('/socket.io.js', function(req, res){
 });
 
 io.on('connection', function(socket){
-  console.log('a user connected');
-  socket.on('disconnect', function(){
-    console.log('user disconnected');
-  });
+    console.log('a user connected');
+    socket.on('disconnect', function(){
+        console.log('user disconnected');
+    });
 
-  socket.on('control', function(msg){
-      console.log("CONTROL");
-      io.emit('command', msg);
-  });
+    socket.on('control', function(msg){
+        console.log("CONTROL: " + msg);
+        io.emit('command', msg);
+    });
+
+    socket.on('song', function(song) {
+        //console.log('Song: ' + song.name + '.');
+        io.emit('song', song);
+    });
 
 });
